@@ -152,6 +152,8 @@ import com.raychen518.study.java._util.Utils;
  * java.util.concurrent.locks.Condition
  * 							An interface that represents a condition providing a means for one thread to suspend execution until notified by another thread.
  * 
+ * java.lang.Object			The class as the root of the class hierarchy. Every class has this class as a superclass.
+ * 
  * java.lang.ThreadLocal<T>	A class that provides thread-local variables.
  * 
  * =====================================
@@ -161,7 +163,7 @@ import com.raychen518.study.java._util.Utils;
  * java.lang.Runnable is an interface that is designed to provide a common protocol for objects which wish to execute code while active.
  * This interface should be implemented by any class whose instances are intended to be executed by a thread.
  * It has main public members as follows.
- * Signature								Description
+ * Member									Description
  * -------------------------------------------------------------------------------------------------
  * void run();								Run the process inside this method (normally this method should not be invoked since it won't start a new thread as possibly expected).
  * 
@@ -251,7 +253,7 @@ import com.raychen518.study.java._util.Utils;
  * and all access to the shared resource requires that the lock be acquired first.
  * However, some locks may allow concurrent access to a shared resource, such as the read lock of a ReadWriteLock.
  * It has main public members as follows.
- * Signature								Description
+ * Member									Description
  * -------------------------------------------------------------------------------------------------
  * void lock();								Acquire the lock.
  * void unlock();							Release the lock.
@@ -265,7 +267,7 @@ import com.raychen518.study.java._util.Utils;
  * java.util.concurrent.locks.ReentrantLock
  * java.util.concurrent.locks.ReentrantLock is a class as a reentrant Lock implementation.
  * It has main public members as follows.
- * Signature								Description
+ * Member									Description
  * -------------------------------------------------------------------------------------------------
  * public ReentrantLock() {...}				Create an instance of ReentrantLock.
  * public ReentrantLock(boolean fair) {...}	Create an instance of ReentrantLock with the given fairness policy.
@@ -289,7 +291,7 @@ import com.raychen518.study.java._util.Utils;
  * The Write lock is still exclusive, while the Read lock may be held simultaneously by multiple threads.
  * The pair of the Read and Write locks may have better performance than the mutual exclusion lock.
  * It has main public members as follows.
- * Signature								Description
+ * Member									Description
  * -------------------------------------------------------------------------------------------------
  * Lock readLock();							Return the Read lock used for reading.
  * Lock writeLock();						Return the Write lock used for writing.
@@ -297,7 +299,7 @@ import com.raychen518.study.java._util.Utils;
  * java.util.concurrent.locks.ReentrantReadWriteLock
  * java.util.concurrent.locks.ReentrantReadWriteLock is a class as a reentrant ReadWriteLock implementation.
  * It has main public members as follows.
- * Signature								Description
+ * Member									Description
  * -------------------------------------------------------------------------------------------------
  * public ReentrantReadWriteLock() {...}	Create an instance of ReentrantReadWriteLock.
  * public ReentrantReadWriteLock(boolean fair) {...}
@@ -323,25 +325,39 @@ import com.raychen518.study.java._util.Utils;
  * java.util.concurrent.locks.Condition is an interface that represents a condition providing a means for one thread to suspend execution until notified by another thread.
  * A Condition instance is intrinsically bound to a lock.
  * It has main public members as follows.
- * Signature								Description
+ * Member									Description
  * -------------------------------------------------------------------------------------------------
  * void await() throws InterruptedException;
- * 											Cause the current thread to wait until it is signalled or interrupted.
+ * 											Cause the current thread to wait until it is signaled or interrupted.
  * boolean await(long time, TimeUnit unit) throws InterruptedException;
- * 											Cause the current thread to wait until it is signalled or interrupted, or the specified waiting time elapses.
+ * 											Cause the current thread to wait until it is signaled or interrupted, or the specified waiting time elapses.
  * long awaitNanos(long nanosTimeout) throws InterruptedException;
- * 											Cause the current thread to wait until it is signalled or interrupted, or the specified waiting time elapses.
- * void awaitUninterruptibly();				Cause the current thread to wait until it is signalled.
+ * 											Cause the current thread to wait until it is signaled or interrupted, or the specified waiting time elapses.
+ * void awaitUninterruptibly();				Cause the current thread to wait until it is signaled.
  * boolean awaitUntil(Date deadline) throws InterruptedException;
- * 											Cause the current thread to wait until it is signalled or interrupted, or the specified deadline elapses.
+ * 											Cause the current thread to wait until it is signaled or interrupted, or the specified deadline elapses.
  * void signalAll();						Wake up all waiting threads.
- * void signal();							Wake up one waiting thread. 
+ * void signal();							Wake up one waiting thread.
+ * 
+ * java.lang.Object
+ * java.lang.Object is the class as the root of the class hierarchy. Every class has this class as a superclass.
+ * It has main public members about multi-threading as follows.
+ * Member									Description
+ * -------------------------------------------------------------------------------------------------
+ * public final native void notify();		Wake up one waiting thread.
+ * public final native void notifyAll();	Wake up all waiting threads.
+ * public final void wait() throws InterruptedException {...}
+ * 											Cause the current thread to wait until it is notified.
+ * public final native void wait(long timeout) throws InterruptedException;
+ * 											Cause the current thread to wait until it is notified, or the specified waiting time elapses.
+ * public final void wait(long timeout, int nanos) throws InterruptedException {...}
+ * 											Cause the current thread to wait until it is notified, or the specified waiting time elapses.
  * 
  * java.lang.ThreadLocal<T>
  * java.lang.ThreadLocal<T> is a class that provides thread-local variables.
  * ThreadLocal instances are typically private static fields in classes that wish to associate state with a thread (e.g., a user ID or Transaction ID). 
  * It has main public members as follows.
- * Signature								Description
+ * Member									Description
  * -------------------------------------------------------------------------------------------------
  * public T get() {...}						Return the value in the current thread's copy of this thread-local variable.
  * public void remove() {...}				Remove the current thread's value for this thread-local variable.
@@ -719,6 +735,22 @@ import com.raychen518.study.java._util.Utils;
  */
 public class Introduction {
 
+	// +++++++++++++
+	// Contents
+	// +++++++++++++
+	// Testing the java.lang.Runnable Interface
+	// Testing the java.lang.Thread Class
+	// Testing the java.util.concurrent.locks.Lock Interface
+	// Testing the java.util.concurrent.locks.ReentrantLock Class
+	// Testing the java.util.concurrent.locks.ReadWriteLock Interface
+	// Testing the java.util.concurrent.locks.ReentrantReadWriteLock Class
+	// Testing the java.util.concurrent.locks.Condition Interface
+	// Testing the java.lang.Object Class
+	// Testing the java.lang.ThreadLocal<T> Class
+	// Testing the Thread States
+	// Testing the Thread Synchronization
+	// Testing the Ways to Create a Thread
+
 	private static Integer someCounter = 0;
 
 	private static final ThreadLocal<Integer> threadLocalVariable = new ThreadLocal<Integer>() {
@@ -1070,6 +1102,104 @@ public class Introduction {
 	}
 
 	// <<<<< for Testing the ReentrantReadWriteLock Class <<<<<
+
+	// >>>>> for Testing the java.lang.Object Class >>>>>
+
+	private static class SomeGoodObject {
+
+		public synchronized void doSomething1() throws InterruptedException {
+			if (true) {
+				wait();
+			}
+
+			// Do something...
+
+			notifyAll();
+		}
+
+		public synchronized void doSomething2() throws InterruptedException {
+			if (true) {
+				wait(1000);
+			}
+
+			// Do something...
+
+			notifyAll();
+		}
+
+		public synchronized void doSomething3() throws InterruptedException {
+			if (true) {
+				wait(1000, 10000);
+			}
+
+			// Do something...
+
+			notify();
+		}
+
+	}
+
+	private static class SomeGoodObjectProcess1 implements Runnable {
+
+		private SomeGoodObject someGoodObject;
+
+		public SomeGoodObjectProcess1(SomeGoodObject someGoodObject) {
+			System.out.println(this);
+			this.someGoodObject = someGoodObject;
+		}
+
+		@Override
+		public void run() {
+			try {
+				someGoodObject.doSomething1();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	private static class SomeGoodObjectProcess2 implements Runnable {
+
+		private SomeGoodObject someGoodObject;
+
+		public SomeGoodObjectProcess2(SomeGoodObject someGoodObject) {
+			System.out.println(this);
+			this.someGoodObject = someGoodObject;
+		}
+
+		@Override
+		public void run() {
+			try {
+				someGoodObject.doSomething2();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	private static class SomeGoodObjectProcess3 implements Runnable {
+
+		private SomeGoodObject someGoodObject;
+
+		public SomeGoodObjectProcess3(SomeGoodObject someGoodObject) {
+			System.out.println(this);
+			this.someGoodObject = someGoodObject;
+		}
+
+		@Override
+		public void run() {
+			try {
+				someGoodObject.doSomething3();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	// <<<<< for Testing the java.lang.Object Class <<<<<
 
 	public static void main(String[] args) throws InterruptedException {
 		// +++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1794,6 +1924,26 @@ public class Introduction {
 
 				}).start();
 			}
+		}
+
+		Utils.printDelimiterLine1();
+
+		// +++++++++++++++++++++++++++++++++++++++++++++++++
+		// Testing the java.lang.Object Class
+		// +++++++++++++++++++++++++++++++++++++++++++++++++
+		{
+			// =============================================
+			// public final void wait() throws InterruptedException {...}
+			// public final native void wait(long timeout) throws
+			// InterruptedException;
+			// public final void wait(long timeout, int nanos) throws
+			// InterruptedException {...}
+			// public final native void notify();
+			// public final native void notifyAll();
+			// =============================================
+			new Thread(new SomeGoodObjectProcess1(new SomeGoodObject())).start();
+			new Thread(new SomeGoodObjectProcess2(new SomeGoodObject())).start();
+			new Thread(new SomeGoodObjectProcess3(new SomeGoodObject())).start();
 		}
 
 		Utils.printDelimiterLine1();
