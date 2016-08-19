@@ -104,6 +104,17 @@ import com.raychen518.study.java._util.Utils;
  *   ThreadLocalRandom.current().nextInt(100)
  *   ---------------------------------------------------------------------------
  * 
+ * - Many threading issues can be solved safely and elegantly by using queues.
+ * 
+ *   For example, the producer threads insert the product elements into a queue,
+ *   and the consumer threads retrieve the product elements from the queue and use them.
+ * 
+ *   By using a queue, data can be safely transferred from one thread to another thread.
+ *   
+ *   If a queue is full when adding an element into it,
+ *   or a queue contains no elements when retrieving an element from it,
+ *   all related threads are blocked. 
+ * 
  * =====================================
  * Hierarchy Graph
  * =====================================
@@ -155,6 +166,8 @@ import com.raychen518.study.java._util.Utils;
  * java.lang.Object			The class as the root of the class hierarchy. Every class has this class as a superclass.
  * 
  * java.lang.ThreadLocal<T>	A class that provides thread-local variables.
+ * java.util.concurrent.ThreadLocalRandom
+ * 							A class acting as a random number generator isolated to the current thread.
  * 
  * =====================================
  * Class/Interface Details
