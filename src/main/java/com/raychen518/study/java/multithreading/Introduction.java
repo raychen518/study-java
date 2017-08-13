@@ -113,7 +113,8 @@ import com.raychen518.study.java._util.Utils;
  *   
  *   If a queue is full when adding an element into it,
  *   or a queue contains no elements when retrieving an element from it,
- *   all related threads are blocked. 
+ *   all related threads are blocked.
+ *   That kind of queues are called Blocking Queues.
  * 
  * =====================================
  * Hierarchy Graph
